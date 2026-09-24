@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Delelager Tilbud</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#EEF1F3; --surface:#FFFFFF; --surface-2:#F5F7F8; --line:#D5DBE0; --line-strong:#AEB8C1;
+  --ink:#16202A; --ink-2:#4A5763; --ink-3:#71808D;
+  --accent:#C4302A; --accent-ink:#FFFFFF; --accent-soft:#FBE6E4; --info:#1E5A8C; --info-soft:#E2ECF5; --neutral-soft:#E6E9EC;
+  --ok:#2E7D4F; --ok-soft:#E3F2E8; --warn:#9A6200; --warn-soft:#FBF0DA; --bad:#B23A30; --bad-soft:#F8E4E2;
+  --plate-blue:#1D3F9A;
+  --f-display:"Barlow Semi Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0F151B; --surface:#172029; --surface-2:#1D2833; --line:#2A3743; --line-strong:#3E4E5C;
+    --ink:#E6ECF1; --ink-2:#AEBBC6; --ink-3:#83929F;
+    --accent:#F0685E; --accent-ink:#1A0B0A; --accent-soft:#3A1E1C; --info:#7DB3E3; --info-soft:#1D3347; --neutral-soft:#26313B;
+    --ok:#6CC592; --ok-soft:#173226; --warn:#E3B055; --warn-soft:#352A14; --bad:#EE8B80; --bad-soft:#3A1E1C;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0F151B; --surface:#172029; --surface-2:#1D2833; --line:#2A3743; --line-strong:#3E4E5C;
+  --ink:#E6ECF1; --ink-2:#AEBBC6; --ink-3:#83929F;
+  --accent:#F0685E; --accent-ink:#1A0B0A; --accent-soft:#3A1E1C; --info:#7DB3E3; --info-soft:#1D3347; --neutral-soft:#26313B;
+  --ok:#6CC592; --ok-soft:#173226; --warn:#E3B055; --warn-soft:#352A14; --bad:#EE8B80; --bad-soft:#3A1E1C;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--f-body);}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:16px;padding-block:0 48px}
+header.top{background:#15181C;border-bottom:3px solid #D5382F;color:#fff;position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.top .wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-block:12px}
+.brand{font-family:var(--f-display);font-weight:700;font-size:20px;letter-spacing:.02em;text-transform:uppercase;display:flex;align-items:baseline;gap:8px}
+.wordmark{font-family:var(--f-display);font-weight:600;letter-spacing:.32em;font-size:19px}
+.logo{height:20px;width:auto;display:block}
+.brand{align-items:center!important}
+.brand small{color:#A9B0B8!important;font-family:var(--f-body);font-weight:500;font-size:12px;letter-spacing:.08em;color:var(--ink-3)}
+nav.tabs{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.tab{border:1px solid transparent;background:none;color:#C9CED4;font:500 14px var(--f-body);padding:7px 12px;border-radius:6px;cursor:pointer}
+.tab:hover{background:#262B31;color:#fff}
+.tab[aria-current="page"]{background:#D5382F;color:#fff;border-color:#D5382F}
+h1,h2,h3{font-family:var(--f-display);font-weight:700;text-wrap:balance;margin:0;letter-spacing:.01em}
+h1{font-size:28px;line-height:1.15}
+h2{font-size:20px}
+h3{font-size:16px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2)}
+.pagehead{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:24px 16px}
+.muted{color:var(--ink-3)}
+.lbl{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:8px}
+.pad{padding:20px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font:600 14px var(--f-body);padding:9px 16px;border-radius:6px;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);cursor:pointer;text-decoration:none}
+.btn:hover{background:var(--surface-2)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.danger{color:var(--bad);border-color:var(--bad)}
+.btn.sm{padding:5px 10px;font-size:13px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:6px;padding:8px 10px;width:100%}
+textarea{min-height:84px;resize:vertical}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--ink-2);font-weight:500}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.stack{display:flex;flex-direction:column;gap:16px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.chip.sendt{background:var(--info-soft);color:var(--info)}
+.chip.bestilt{background:var(--ok-soft);color:var(--ok)}
+.chip.avvist{background:var(--neutral-soft);color:var(--ink-2)}
+.chip.lager{background:var(--ok-soft);color:var(--ok)}
+.chip.bestilling{background:var(--warn-soft);color:var(--warn)}
+.num{font-variant-numeric:tabular-nums}
+.mono{font-family:var(--f-mono)}
+/* Norwegian plate */
+.plate{display:inline-flex;align-items:stretch;border:2px solid #111;border-radius:4px;background:#fff;color:#111;font:600 15px var(--f-mono);letter-spacing:.08em;overflow:hidden;line-height:1}
+.plate b{background:var(--plate-blue);color:#fff;font:600 9px var(--f-body);display:flex;align-items:flex-end;padding:3px 3px 2px;letter-spacing:0}
+.plate span{padding:5px 8px}
+/* table */
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:640px}
+th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:500;background:var(--surface-2)}
+tr:last-child td{border-bottom:none}
+td.r,th.r{text-align:right}
+tbody tr:hover{background:var(--surface-2)}
+/* customer view */
+.cust{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:20px;align-items:start;padding-top:24px}
+.summary{position:sticky;top:calc(env(safe-area-inset-top,0px) + 76px)}
+.orderhead{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline;padding:20px;border-bottom:1px solid var(--line)}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;padding:20px;border-bottom:1px solid var(--line)}
+.meta .v{font-weight:500}
+.kolli{padding:20px;display:flex;flex-direction:column;gap:12px}
+.line{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px;border:1px solid var(--line);border-radius:6px;background:var(--surface-2)}
+.line.removed{opacity:.45}
+.line .name{font-weight:600}
+.line .sub{font-size:13px;color:var(--ink-3)}
+.line .tot{font-weight:600;text-align:right}
+.step{display:inline-flex;border:1px solid var(--line-strong);border-radius:6px;overflow:hidden;background:var(--surface)}
+.step button{width:32px;border:none;background:none;color:var(--ink);font:600 16px var(--f-body);cursor:pointer}
+.step button:hover{background:var(--surface-2)}
+.step output{min-width:34px;text-align:center;padding:6px 0;font-weight:600;border-inline:1px solid var(--line)}
+.linkbtn{background:none;border:none;padding:0;color:var(--accent);font:500 13px var(--f-body);cursor:pointer;text-decoration:underline}
+.section{padding:20px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:12px}
+.pickup{background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:12px 14px}
+.radios{display:flex;flex-direction:column;gap:8px}
+.radios label,.checks label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.radios input,.checks input{width:auto;margin-top:3px;accent-color:var(--accent)}
+.seg{display:inline-flex;border:1px solid var(--line-strong);border-radius:6px;overflow:hidden;flex-wrap:wrap}
+.seg button{border:none;background:var(--surface);color:var(--ink-2);font:500 14px var(--f-body);padding:8px 14px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.sumrow{display:flex;justify-content:space-between;gap:12px;padding:6px 0}
+.sumrow.total{border-top:1px solid var(--line);margin-top:6px;padding-top:12px;font-size:18px;font-weight:600}
+.checks{display:flex;flex-direction:column;gap:10px;font-size:14px}
+.banner{padding:12px 14px;border-radius:6px;font-weight:500}
+.banner.ok{background:var(--ok-soft);color:var(--ok)}
+.banner.bad{background:var(--bad-soft);color:var(--bad)}
+.banner.info{background:var(--info-soft);color:var(--info)}
+.banner.warn{background:var(--warn-soft);color:var(--warn)}
+.err{color:var(--bad);font-size:13px;font-weight:500}
+/* editor */
+.edline{display:grid;grid-template-columns:120px minmax(0,1fr) 80px 120px 150px auto;gap:8px;align-items:end}
+.mail{background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:14px;white-space:pre-wrap;font-size:14px;overflow-wrap:anywhere}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:6px;font-weight:500;z-index:20}
+.empty{padding:32px 20px;text-align:center;color:var(--ink-3)}
+.confirmrow{display:inline-flex;gap:6px;align-items:center}
+@media (max-width:860px){
+  .cust{grid-template-columns:1fr}
+  .summary{position:static}
+  .edline{grid-template-columns:1fr 1fr}
+  .edline .wide{grid-column:1/-1}
+}
+@media (max-width:480px){
+  .line{grid-template-columns:1fr;}
+  .line .tot{text-align:left}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<style>[hidden]{display:none!important}body{margin:0}img{max-width:100%}</style>
+</head>
+<body>
+
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><img class="logo" src="data:image/png;base64,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" alt="Autosalg"><small>Delelager</small></div>
+    <nav class="tabs" id="tabs">
+      <button class="tab" data-go="">Tilbud</button>
+      <button class="tab" data-go="ny">Nytt tilbud</button>
+    </nav>
+  </div>
+</header>
+<main class="wrap" id="app"></main>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+/* ---------- settings ---------- */
+const LINK_BASE = location.href.split("#")[0]; // artifact-lenken; kunden åpner LINK_BASE + "#t<ordrenr>"
+const LAGER = { navn:"Autosalg AS – Delelager", adresse:"Storetveitvegen 58, 5067 Bergen", apning:"07:00–15:00", telefon:"55 36 10 00" };
+const MVA = 0.25;
+
+/* ---------- helpers ---------- */
+const $ = (s,el=document)=>el.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const kr = n => (Number(n)||0).toLocaleString("nb-NO",{minimumFractionDigits:2,maximumFractionDigits:2})+" kr";
+const dato = iso => iso ? new Date(iso).toLocaleDateString("nb-NO",{day:"2-digit",month:"2-digit",year:"numeric"}) : "";
+const tid = iso => iso ? new Date(iso).toLocaleString("nb-NO",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"}) : "";
+const plate = r => `<span class="plate"><b>N</b><span>${esc((r||"").toUpperCase())}</span></span>`;
+const statusTxt = {sendt:"Venter på kunde",bestilt:"Bestilt",avvist:"Avvist"};
+const linkFor = id => (LINK_BASE.startsWith("http") ? LINK_BASE : "[lenke til tilbudssiden]") + "#t" + id;
+function toast(msg){const t=$("#toast");t.textContent=msg;t.hidden=false;clearTimeout(toast._t);toast._t=setTimeout(()=>t.hidden=true,2600)}
+async function copy(text){
+  try{await navigator.clipboard.writeText(text);toast("Kopiert")}
+  catch(e){toast("Kunne ikke kopiere automatisk – marker teksten og kopier manuelt")}
+}
+function totals(linjer,rabattPst){
+  const brutto = linjer.reduce((s,l)=>s+(Number(l.antall)||0)*(Number(l.pris)||0),0);
+  const rabatt = brutto*(Number(rabattPst)||0)/100;
+  const sum = brutto-rabatt;
+  return {brutto,rabatt,sum,mva:sum-sum/(1+MVA)};
+}
+
+/* ---------- state ---------- */
+let db=null, offers=[], loaded=false, dbState="venter";
+let draft=null;        // editor draft
+let custState={};      // per-offer customer edits (id -> {...})
+let saved=null;        // last saved offer id in editor
+
+function route(){ return (location.hash||"").replace(/^#/,""); }
+function go(h){ if(route()===h) render(); else location.hash = h; }
+window.addEventListener("hashchange",render);
+$("#tabs").addEventListener("click",e=>{const b=e.target.closest("[data-go]");if(b){ if(b.dataset.go==="ny"){draft=null;saved=null;} go(b.dataset.go);} });
+
+/* ---------- lagring (demo: lagres i nettleseren) ---------- */
+const KEY="autosalg-delelager-tilbud";
+const SEED={"8360001":{"ordrenr":"8360001","opprettet":"2026-09-24T09:15:00.000Z","status":"sendt","kunde":{"firma":"Eksempel Bilverksted AS","kontakt":"Ola Eksempel","epost":"ola@eksempel.no","telefon":"","adresse":"Eksempelveien 1, 5257 Kokstad"},"regnr":"EB99996","modell":"Peugeot e-2008 GT Line 136 hk","rabattPst":0,"linjer":[{"id":"a1b2c3","varenr":"","navn":"Bremseslange foran venstre","antall":1,"pris":2889.11,"lager":"lager","info":""},{"id":"d4e5f6","varenr":"","navn":"Bremseslange foran høyre","antall":1,"pris":2889.11,"lager":"lager","info":""}],"merknad":"Eksempeltilbud – slett det når du har testet.","lager":LAGER}};
+function loadAll(){try{const r=localStorage.getItem(KEY);if(r)return JSON.parse(r)}catch(e){}return JSON.parse(JSON.stringify(SEED))}
+let store=loadAll(); const listeners=new Set();
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){} emit()}
+function emit(){const docs=Object.entries(store).sort((a,b)=>(b[1].opprettet||"").localeCompare(a[1].opprettet||"")).map(([id,d])=>({id,data:()=>d}));listeners.forEach(f=>f({docs}))}
+window.addEventListener("storage",e=>{if(e.key===KEY){store=loadAll();emit()}});
+db={
+  collection(){return {orderBy(){return this},onSnapshot(cb){listeners.add(cb);setTimeout(()=>cb({docs:Object.entries(store).sort((a,b)=>(b[1].opprettet||"").localeCompare(a[1].opprettet||"")).map(([id,d])=>({id,data:()=>d}))}),0);return()=>listeners.delete(cb)}}},
+  doc(path){const id=path.split("/")[1];return{
+    async set(d){store[id]=JSON.parse(JSON.stringify(d));persist()},
+    async update(d){if(!store[id])throw{code:"invalid_argument"};store[id]={...store[id],...JSON.parse(JSON.stringify(d))};persist()},
+    async delete(){delete store[id];persist()}}}
+};
+dbState="ok";
+db.collection("tilbud").orderBy("opprettet","desc").onSnapshot(snap=>{offers=snap.docs.map(d=>({id:d.id,...d.data()}));loaded=true;render();});
+
+/* ---------- render ---------- */
+function render(){
+  const r=route();
+  document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-current", (t.dataset.go===r || (t.dataset.go==="" && r==="")) ? "page":"false"));
+  const app=$("#app");
+  if(r.startsWith("t") && r.length>1) return renderCustomer(app, r.slice(1));
+  if(r==="ny") return renderEditor(app);
+  return renderList(app);
+}
+
+function dbNotice(){
+  if(dbState==="mangler") return `<div class="banner warn" style="margin-bottom:16px">Lagring er ikke tilgjengelig i denne visningen. Tilbud kan ikke lagres eller hentes.</div>`;
+  if(dbState==="feil") return `<div class="banner bad" style="margin-bottom:16px">Klarte ikke å hente tilbud. Last siden på nytt.</div>`;
+  return "";
+}
+
+/* ----- list (lager) ----- */
+let confirmDel=null;
+function renderList(app){
+  const count = s => offers.filter(o=>o.status===s).length;
+  app.innerHTML = `
+  <div class="pagehead">
+    <div><div class="lbl">Delelager</div><h1>Tilbud til kunder</h1></div>
+    <button class="btn primary" data-act="new">+ Nytt tilbud</button>
+  </div>
+  ${dbNotice()}
+  <div class="panel">
+    <div class="pad" style="display:flex;gap:18px;flex-wrap:wrap;border-bottom:1px solid var(--line)">
+      <span class="chip sendt">${count("sendt")} venter på kunde</span>
+      <span class="chip bestilt">${count("bestilt")} bestilt</span>
+      <span class="chip avvist">${count("avvist")} avvist</span>
+    </div>
+    ${!loaded ? `<div class="empty">Henter tilbud…</div>` : offers.length===0 ? `<div class="empty">Ingen tilbud ennå. Lag det første med «Nytt tilbud».</div>` : `
+    <div class="tablewrap"><table>
+      <thead><tr><th>Ordrenr</th><th>Dato</th><th>Kunde</th><th>Kjøretøy</th><th class="r">Sum</th><th>Status</th><th></th></tr></thead>
+      <tbody>${offers.map(o=>{
+        const t=totals(o.linjer||[],o.rabattPst);
+        return `<tr>
+          <td class="mono">${esc(o.id)}</td>
+          <td class="num">${dato(o.opprettet)}</td>
+          <td><div style="font-weight:600">${esc(o.kunde?.firma)}</div><div class="muted" style="font-size:13px">${esc(o.kunde?.kontakt||"")}</div></td>
+          <td>${plate(o.regnr)}<div class="muted" style="font-size:13px;margin-top:4px">${esc(o.modell)}</div></td>
+          <td class="r num">${kr(t.sum)}</td>
+          <td><span class="chip ${o.status}">${statusTxt[o.status]||o.status}</span>${o.status==="bestilt"?`<div class="muted" style="font-size:12px;margin-top:4px">${tid(o.bestiltTid)}</div>`:""}${o.kommentar?`<div style="font-size:13px;margin-top:4px;max-width:220px">«${esc(o.kommentar)}»</div>`:""}</td>
+          <td style="white-space:nowrap">
+            <button class="btn sm" data-act="open" data-id="${esc(o.id)}">Åpne</button>
+            <button class="btn sm" data-act="copy" data-id="${esc(o.id)}">Kopier lenke</button>
+            ${confirmDel===o.id
+              ? `<span class="confirmrow"><button class="btn sm danger" data-act="del2" data-id="${esc(o.id)}">Slett</button><button class="btn sm" data-act="delno">Avbryt</button></span>`
+              : `<button class="btn sm" data-act="del" data-id="${esc(o.id)}" aria-label="Slett tilbud">🗑</button>`}
+          </td></tr>`}).join("")}
+      </tbody></table></div>`}
+  </div>`;
+  app.onclick = async e=>{
+    const b=e.target.closest("[data-act]"); if(!b) return;
+    const id=b.dataset.id;
+    if(b.dataset.act==="new"){draft=null;saved=null;go("ny")}
+    if(b.dataset.act==="open") go("t"+id);
+    if(b.dataset.act==="copy") copy(linkFor(id));
+    if(b.dataset.act==="del"){confirmDel=id;render()}
+    if(b.dataset.act==="delno"){confirmDel=null;render()}
+    if(b.dataset.act==="del2"){confirmDel=null;try{await db.doc("tilbud/"+id).delete();toast("Tilbud slettet")}catch(err){toast("Kunne ikke slette")}}
+  };
+}
+
+/* ----- editor (lager lager tilbud) ----- */
+function nextId(){
+  const max = offers.reduce((m,o)=>Math.max(m,parseInt(o.id,10)||0),8360000);
+  return String(max+1);
+}
+function newLine(){return {id:Math.random().toString(36).slice(2,8),varenr:"",navn:"",antall:1,pris:0,lager:"lager",info:""}}
+function renderEditor(app){
+  if(!draft) draft={kunde:{firma:"",kontakt:"",epost:"",telefon:"",adresse:""},regnr:"",modell:"",rabattPst:0,linjer:[newLine()],merknad:""};
+  if(saved){
+    const o=offers.find(x=>x.id===saved);
+    const link=linkFor(saved);
+    const mail=`Hei ${o?.kunde?.firma||""},\n\nSe tilbud på delebestilling via lenken under.\n\nOrdrenr: ${saved}\nRegistreringsnummer: ${(o?.regnr||"").toUpperCase()}\nModell: ${o?.modell||""}\nÅpningstider for henting av deler: ${LAGER.apning}\n\nSe og eventuelt godkjenn tilbudet ditt her:\n${link}\n\nMed vennlig hilsen\n${LAGER.navn}`;
+    app.innerHTML=`
+    <div class="pagehead"><div><div class="lbl">Tilbud ${esc(saved)}</div><h1>Tilbudet er lagret</h1></div></div>
+    <div class="panel pad stack">
+      <div class="banner ok">Send lenken til kunden. Når kunden trykker «Bekreft og bestill», endres status til Bestilt i listen.</div>
+      <label class="f">Lenke til kunden<input id="lnk" readonly value="${esc(link)}"></label>
+      <div class="lbl">Forslag til e-post / SMS</div>
+      <div class="mail" id="mailtxt">${esc(mail)}</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn primary" data-act="cl">Kopier lenke</button>
+        <button class="btn" data-act="cm">Kopier e-posttekst</button>
+        <button class="btn" data-act="pv">Se kundens visning</button>
+        <button class="btn" data-act="nw">Lag nytt tilbud</button>
+      </div>
+    </div>`;
+    app.onclick=e=>{const a=e.target.closest("[data-act]")?.dataset.act;
+      if(a==="cl")copy(link); if(a==="cm")copy(mail); if(a==="pv")go("t"+saved);
+      if(a==="nw"){draft=null;saved=null;render()} };
+    app.oninput=null;
+    return;
+  }
+  const d=draft, t=totals(d.linjer,d.rabattPst);
+  app.innerHTML=`
+  <div class="pagehead"><div><div class="lbl">Delelager</div><h1>Nytt tilbud</h1></div></div>
+  ${dbNotice()}
+  <form id="ed" class="stack" novalidate>
+    <div class="panel pad stack">
+      <h3>Kunde</h3>
+      <div class="grid2">
+        <label class="f">Firma *<input id="k_firma" value="${esc(d.kunde.firma)}" required></label>
+        <label class="f">Kontaktperson<input id="k_kontakt" value="${esc(d.kunde.kontakt)}"></label>
+        <label class="f">E-post<input id="k_epost" type="email" value="${esc(d.kunde.epost)}"></label>
+        <label class="f">Telefon<input id="k_telefon" value="${esc(d.kunde.telefon)}"></label>
+        <label class="f">Adresse<input id="k_adresse" value="${esc(d.kunde.adresse)}"></label>
+      </div>
+      <h3 style="margin-top:8px">Kjøretøy</h3>
+      <div class="grid2">
+        <label class="f">Registreringsnummer *<input id="regnr" class="mono" value="${esc(d.regnr)}" placeholder="EB12345" style="text-transform:uppercase"></label>
+        <label class="f">Modell<input id="modell" value="${esc(d.modell)}" placeholder="Peugeot e-2008 GT Line 136 hk"></label>
+      </div>
+    </div>
+    <div class="panel pad stack">
+      <h3>Deler</h3>
+      ${d.linjer.map((l,i)=>`
+        <div class="edline" data-i="${i}">
+          <label class="f">Varenr<input data-k="varenr" class="mono" value="${esc(l.varenr)}"></label>
+          <label class="f wide">Beskrivelse *<input data-k="navn" value="${esc(l.navn)}" placeholder="Bremseslange foran"></label>
+          <label class="f">Antall<input data-k="antall" type="number" min="1" step="1" value="${esc(l.antall)}"></label>
+          <label class="f">Pris pr stk inkl. mva<input data-k="pris" type="number" min="0" step="0.01" value="${esc(l.pris)}"></label>
+          <label class="f">Tilgjengelighet<select data-k="lager"><option value="lager" ${l.lager==="lager"?"selected":""}>På lager</option><option value="bestilling" ${l.lager==="bestilling"?"selected":""}>Bestillingsvare</option></select></label>
+          <button type="button" class="btn sm" data-act="rm" data-i="${i}" ${d.linjer.length<2?"disabled":""}>Fjern</button>
+          ${l.lager==="bestilling"?`<label class="f wide" style="grid-column:1/-1">Leveringsinfo<input data-k="info" value="${esc(l.info)}" placeholder="Lagerført i Oslo – klar neste virkedag"></label>`:""}
+        </div>`).join("")}
+      <div><button type="button" class="btn" data-act="add">+ Legg til del</button></div>
+      <div class="grid2" style="align-items:end">
+        <label class="f">Rabatt %<input id="rabattPst" type="number" min="0" max="100" step="0.5" value="${esc(d.rabattPst)}"></label>
+        <div class="num" style="text-align:right"><div class="muted">Sum inkl. mva</div><div style="font-size:22px;font-weight:600" id="edsum">${kr(t.sum)}</div></div>
+      </div>
+      <label class="f">Merknad til kunden (valgfritt)<textarea id="merknad" placeholder="F.eks. bestillingsfrist kl 15:30 for levering neste virkedag">${esc(d.merknad)}</textarea></label>
+    </div>
+    <div id="ederr" class="err" hidden></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn primary" type="submit" ${dbState!=="ok"?"disabled":""}>Lagre og lag lenke</button>
+      <button class="btn" type="button" data-act="cancel">Avbryt</button>
+    </div>
+  </form>`;
+  const form=$("#ed");
+  app.oninput=e=>{
+    const el=e.target;
+    if(el.id?.startsWith("k_")) d.kunde[el.id.slice(2)]=el.value;
+    else if(["regnr","modell","rabattPst","merknad"].includes(el.id)) d[el.id]=el.value;
+    else if(el.dataset.k){const i=+el.closest("[data-i]").dataset.i; d.linjer[i][el.dataset.k]=el.value; if(el.dataset.k==="lager") return render();}
+    $("#edsum").textContent=kr(totals(d.linjer,d.rabattPst).sum);
+  };
+  app.onchange=e=>{ if(e.target.dataset.k==="lager") render(); };
+  app.onclick=e=>{const b=e.target.closest("[data-act]");if(!b)return;
+    if(b.dataset.act==="add"){d.linjer.push(newLine());render()}
+    if(b.dataset.act==="rm"){d.linjer.splice(+b.dataset.i,1);render()}
+    if(b.dataset.act==="cancel"){draft=null;go("")}
+  };
+  form.onsubmit=async e=>{
+    e.preventDefault();
+    const errEl=$("#ederr");
+    const linjer=d.linjer.filter(l=>l.navn.trim()).map(l=>({id:l.id,varenr:l.varenr.trim(),navn:l.navn.trim(),antall:Math.max(1,parseInt(l.antall,10)||1),pris:Math.round((parseFloat(l.pris)||0)*100)/100,lager:l.lager,info:l.lager==="bestilling"?l.info.trim():""}));
+    const miss=[];
+    if(!d.kunde.firma.trim())miss.push("firma");
+    if(!d.regnr.trim())miss.push("registreringsnummer");
+    if(!linjer.length)miss.push("minst én del med beskrivelse");
+    if(miss.length){errEl.textContent="Fyll inn "+miss.join(", ")+".";errEl.hidden=false;return}
+    errEl.hidden=true;
+    const id=nextId();
+    const doc={ordrenr:id,opprettet:new Date().toISOString(),status:"sendt",
+      kunde:Object.fromEntries(Object.entries(d.kunde).map(([k,v])=>[k,v.trim()])),
+      regnr:d.regnr.trim().toUpperCase().replace(/\s+/g,""),modell:d.modell.trim(),
+      rabattPst:parseFloat(d.rabattPst)||0,linjer,merknad:d.merknad.trim(),
+      lager:LAGER};
+    try{ await db.doc("tilbud/"+id).set(doc); saved=id; draft=null; render(); }
+    catch(err){ errEl.textContent= err?.code==="quota_exceeded" ? "Lageret er fullt – slett gamle tilbud og prøv igjen." : "Kunne ikke lagre tilbudet. Prøv igjen."; errEl.hidden=false; }
+  };
+}
+
+/* ----- customer view (kunden åpner lenken) ----- */
+function renderCustomer(app,id){
+  const o=offers.find(x=>x.id===id);
+  if(!o){
+    app.innerHTML = `<div class="pagehead"><h1>Tilbud ${esc(id)}</h1></div>${dbNotice()}<div class="panel empty">${loaded?"Fant ikke dette tilbudet. Det kan være slettet, eller lenken er feil.":"Henter tilbud…"}</div>`;
+    app.onclick=null; return;
+  }
+  const locked = o.status!=="sendt";
+  if(!custState[id]) custState[id]={
+    antall:Object.fromEntries((o.linjer||[]).map(l=>[l.id,l.antall])),
+    levering:o.levering||"hentes", hentevalg:o.hentevalg||"samlet", betaling:o.betaling||"faktura",
+    referanse:o.referanse||"", kommentar:o.kommentar||"", c1:false, c2:false, err:"", sending:false, avvisSp:false };
+  const s=custState[id];
+  const linjer=(o.linjer||[]).map(l=>({...l,antall: locked? l.antall : s.antall[l.id]}));
+  const t=totals(linjer,o.rabattPst);
+  const lager=o.lager||LAGER;
+  const dis = locked?"disabled":"";
+
+  app.innerHTML=`
+  <div class="cust">
+    <div class="panel">
+      <div class="orderhead">
+        <div><div class="lbl">Tilbudsoversikt</div><h1>Ordrenr ${esc(o.id)}</h1></div>
+        <div class="muted num">Dato: ${dato(o.opprettet)}</div>
+      </div>
+      ${o.status==="bestilt"?`<div class="pad" style="padding-bottom:0"><div class="banner ok">Bestilt ${tid(o.bestiltTid)}. Takk – delelageret har mottatt bestillingen.</div></div>`:""}
+      ${o.status==="avvist"?`<div class="pad" style="padding-bottom:0"><div class="banner bad">Tilbudet ble avvist ${tid(o.bestiltTid)}.</div></div>`:""}
+      <div class="meta">
+        <div><div class="lbl">Kunde</div><div class="v">${esc(o.kunde?.firma)}</div>
+          <div class="muted" style="font-size:14px">${esc(o.kunde?.adresse||"")}${o.kunde?.kontakt?`<br>${esc(o.kunde.kontakt)}`:""}${o.kunde?.epost?`<br>${esc(o.kunde.epost)}`:""}${o.kunde?.telefon?`<br>Tlf ${esc(o.kunde.telefon)}`:""}</div></div>
+        <div><div class="lbl">Kjøretøy</div><div style="margin:4px 0">${plate(o.regnr)}</div><div class="v">${esc(o.modell)}</div></div>
+      </div>
+      <div class="kolli">
+        <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center">
+          <h2>Artikler <span class="muted" style="font-size:14px;font-family:var(--f-body);font-weight:500">${linjer.filter(l=>l.antall>0).length} varer</span></h2>
+          ${linjer.every(l=>l.lager==="lager")?`<span class="chip lager">Alle varer er tilgjengelig på lageret</span>`:""}
+        </div>
+        ${linjer.map(l=>`
+          <div class="line ${l.antall===0?"removed":""}">
+            <div class="step" aria-label="Antall">
+              <button type="button" data-act="minus" data-l="${esc(l.id)}" ${dis} aria-label="Færre">−</button>
+              <output class="num">${l.antall}</output>
+              <button type="button" data-act="plus" data-l="${esc(l.id)}" ${dis} aria-label="Flere">+</button>
+            </div>
+            <div>
+              <div class="name">${esc(l.navn)}</div>
+              <div class="sub">${l.varenr?`<span class="mono">${esc(l.varenr)}</span> · `:""}${kr(l.pris)} pr stk</div>
+              <div style="margin-top:6px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+                <span class="chip ${l.lager}">${l.lager==="lager"?"På lager":"Bestillingsvare"}</span>
+                ${l.info?`<span class="sub">${esc(l.info)}</span>`:""}
+                ${!locked ? (l.antall===0?`<button class="linkbtn" data-act="angre" data-l="${esc(l.id)}">Angre</button>`:`<button class="linkbtn" data-act="fjern" data-l="${esc(l.id)}">Fjern</button>`) : ""}
+              </div>
+            </div>
+            <div class="tot num">${kr(l.antall*l.pris)}</div>
+          </div>`).join("")}
+        ${o.merknad?`<div class="banner info">${esc(o.merknad)}</div>`:""}
+      </div>
+
+      <div class="section">
+        <h3>Levering</h3>
+        <div class="seg" role="group" aria-label="Levering">
+          <button type="button" data-act="lev" data-v="hentes" aria-pressed="${s.levering==="hentes"}" ${dis}>Hentes hos lageret</button>
+          <button type="button" data-act="lev" data-v="sendes" aria-pressed="${s.levering==="sendes"}" ${dis}>Send til oss</button>
+        </div>
+        ${s.levering==="hentes"?`
+        <div class="pickup"><div style="font-weight:600">${esc(lager.navn)}</div><div class="muted" style="font-size:14px">${esc(lager.adresse)} · Åpent ${esc(lager.apning)}${lager.telefon?` · Tlf ${esc(lager.telefon)}`:""}</div></div>
+        <div class="lbl">Valg for henting</div>
+        <div class="radios">
+          <label><input type="radio" name="hv" value="samlet" ${s.hentevalg==="samlet"?"checked":""} ${dis}><span>Hele bestillingen hentes samlet</span></label>
+          <label><input type="radio" name="hv" value="fortlopende" ${s.hentevalg==="fortlopende"?"checked":""} ${dis}><span>Bestillingen hentes fortløpende</span></label>
+        </div>`:`<div class="pickup muted" style="font-size:14px">Sendes til ${esc(o.kunde?.adresse||"adressen vi har registrert")}. Frakt kommer i tillegg.</div>`}
+      </div>
+
+      <div class="section">
+        <h3>Betaling</h3>
+        <div class="seg" role="group" aria-label="Betaling">
+          <button type="button" data-act="bet" data-v="faktura" aria-pressed="${s.betaling==="faktura"}" ${dis}>Betales med faktura</button>
+          <button type="button" data-act="bet" data-v="kontant" aria-pressed="${s.betaling==="kontant"}" ${dis}>Betales kontant ved henting</button>
+        </div>
+        <label class="f" style="max-width:320px">Egen referanse (valgfritt)<input id="c_ref" value="${esc(s.referanse)}" ${dis} placeholder="F.eks. arbeidsordre 5090312"><span class="muted" style="font-weight:400;font-size:12px">Vises på fakturaen</span></label>
+      </div>
+
+      <div class="section">
+        <h3>Kommentar og ordrelinje</h3>
+        <label class="f">Kommentar til delelageret<textarea id="c_kom" ${dis} placeholder="Skriv inn eventuelle kommentarer her">${esc(s.kommentar)}</textarea></label>
+      </div>
+    </div>
+
+    <aside class="panel pad summary stack">
+      <h2>Oppsummering</h2>
+      <div>
+        <div class="sumrow"><span class="muted">Sammenlagt pris</span><span class="num">${kr(t.brutto)}</span></div>
+        <div class="sumrow"><span class="muted">Rabatt${o.rabattPst?` (${o.rabattPst} %)`:""}</span><span class="num">−${kr(t.rabatt)}</span></div>
+        <div class="sumrow total"><span>Sum</span><span class="num">${kr(t.sum)}</span></div>
+        <div class="sumrow" style="font-size:13px"><span class="muted">Herav mva 25 %</span><span class="num muted">${kr(t.mva)}</span></div>
+      </div>
+      <div style="border-top:1px solid var(--line);padding-top:12px">
+        <div class="sumrow"><span class="muted">Levering</span><span>${s.levering==="hentes"?"Hentes hos lageret":"Sendes"}</span></div>
+        ${s.levering==="hentes"?`<div class="sumrow"><span class="muted">Leveringsvalg</span><span>${s.hentevalg==="samlet"?"Samlet bestilling":"Fortløpende"}</span></div>`:""}
+        <div class="sumrow"><span class="muted">Betaling</span><span>${s.betaling==="faktura"?"Faktura":"Kontant"}</span></div>
+        <div class="sumrow"><span class="muted">Referanse</span><span class="mono">${esc(s.referanse)||"–"}</span></div>
+      </div>
+      ${locked?`<span class="chip ${o.status}" style="align-self:flex-start">${statusTxt[o.status]}</span>`:`
+      <div class="checks">
+        <label><input type="checkbox" id="c1" ${s.c1?"checked":""}><span>Jeg har lest gjennom ordren og bekrefter at informasjonen er korrekt og fullstendig *</span></label>
+        <label><input type="checkbox" id="c2" ${s.c2?"checked":""}><span>Jeg har lest og godkjenner vilkår for handelen *</span></label>
+      </div>
+      ${s.err?`<div class="err">${esc(s.err)}</div>`:""}
+      <button class="btn primary" data-act="bestill" ${s.sending?"disabled":""}>${s.sending?"Sender…":"Bekreft og bestill"}</button>
+      ${s.avvisSp
+        ? `<div class="stack" style="gap:8px"><span style="font-size:14px">Vil du avvise tilbudet?</span><div style="display:flex;gap:8px"><button class="btn sm danger" data-act="avvis2">Ja, avvis</button><button class="btn sm" data-act="avvisno">Nei</button></div></div>`
+        : `<button class="linkbtn" style="align-self:flex-start" data-act="avvis">Avvis tilbudet</button>`}`}
+    </aside>
+  </div>`;
+
+  app.oninput=e=>{
+    if(e.target.id==="c_ref"){s.referanse=e.target.value; const ref=app.querySelectorAll(".summary .sumrow .mono"); if(ref[0]) ref[0].textContent=s.referanse||"–";}
+    if(e.target.id==="c_kom") s.kommentar=e.target.value;
+  };
+  app.onchange=e=>{
+    if(e.target.name==="hv"){s.hentevalg=e.target.value;render()}
+    if(e.target.id==="c1"){s.c1=e.target.checked;s.err=""}
+    if(e.target.id==="c2"){s.c2=e.target.checked;s.err=""}
+  };
+  app.onclick=async e=>{
+    const b=e.target.closest("[data-act]"); if(!b||locked) return;
+    const a=b.dataset.act, lid=b.dataset.l;
+    if(a==="plus"){s.antall[lid]++;render()}
+    if(a==="minus"){s.antall[lid]=Math.max(0,s.antall[lid]-1);render()}
+    if(a==="fjern"){s.antall[lid]=0;render()}
+    if(a==="angre"){s.antall[lid]=(o.linjer.find(l=>l.id===lid)?.antall)||1;render()}
+    if(a==="lev"){s.levering=b.dataset.v;render()}
+    if(a==="bet"){s.betaling=b.dataset.v;render()}
+    if(a==="avvis"){s.avvisSp=true;render()}
+    if(a==="avvisno"){s.avvisSp=false;render()}
+    if(a==="avvis2"){
+      try{await db.doc("tilbud/"+id).update({status:"avvist",bestiltTid:new Date().toISOString(),kommentar:s.kommentar.trim()});toast("Tilbudet er avvist")}
+      catch(err){s.err="Kunne ikke avvise. Prøv igjen.";render()}
+    }
+    if(a==="bestill"){
+      if(!s.c1||!s.c2){s.err="Kryss av for begge bekreftelsene før du bestiller.";return render()}
+      const nye=linjer.filter(l=>l.antall>0);
+      if(!nye.length){s.err="Bestillingen har ingen varer. Øk antall på minst én vare.";return render()}
+      if(!db){s.err="Bestillingen kan ikke sendes fra denne visningen.";return render()}
+      s.sending=true;s.err="";render();
+      try{
+        await db.doc("tilbud/"+id).update({status:"bestilt",bestiltTid:new Date().toISOString(),linjer:nye,
+          levering:s.levering,hentevalg:s.hentevalg,betaling:s.betaling,referanse:s.referanse.trim(),kommentar:s.kommentar.trim()});
+        s.sending=false; toast("Bestillingen er sendt");
+      }catch(err){s.sending=false;s.err="Bestillingen ble ikke sendt. Prøv igjen.";render()}
+    }
+  };
+}
+
+render();
+</script>
+
+<footer class="wrap muted" style="font-size:12px;padding-block:0 24px">Demoversjon – tilbud lagres bare i denne nettleseren.</footer>
+</body>
+</html>
